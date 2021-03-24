@@ -2,9 +2,12 @@
 
 
 ## Logowanie
-/login/
+path /login/
+
 GET - informacja
+
 POST - przekazanie username oraz password, w odpowiedzi token
+
 {
     "username": "sdfg",
     "password": "sdfggfds"
@@ -12,8 +15,10 @@ POST - przekazanie username oraz password, w odpowiedzi token
 
 
 ## Users
-/users/<id>/ id=user
+path /users/id/ id=user
+
 GET - uzyskanie informacji o uzytkowniku oraz listy jego kotow
+
 {
     "id": 1,
     "cats": [
@@ -34,8 +39,10 @@ GET - uzyskanie informacji o uzytkowniku oraz listy jego kotow
 }        
 
 ## Hunting
-/hunting/<catid>/  catid=id kota
+path /hunting/idcat/  idcat=id kota
+
 GET - informacje o kocie
+
 {
     "id": 5,
     "name": "arnold",
@@ -45,6 +52,7 @@ GET - informacje o kocie
 }
 
 POST - przekazanie informacji o polowaniu. Daty, lista zdobyczy ...
+
 {
     "loots":["mouse", "rat", "fish", "bird"],
     "dateStart" : "2021-03-22",
