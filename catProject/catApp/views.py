@@ -17,7 +17,8 @@ class UserAPIView(APIView):
         except User.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
         if user != request.user:
-            return Response({"response":"Access forbidden. Only owner can see his cats."}, status=status.HTTP_403_FORBIDDEN)
+            return Response({"response":"Access forbidden. Only owner "
+            +"can see his cats."}, status=status.HTTP_403_FORBIDDEN)
         serializer = UserSerializer(user)
         return Response(serializer.data)
 
@@ -37,9 +38,11 @@ class HuntingAPIView(APIView):
         try:
             cat = Cat.objects.get(id=idcat)
         except Cat.DoesNotExist:
-            return Response({"response": "Cat not found."},status=status.HTTP_404_NOT_FOUND)
+            return Response({"response": "Cat not found."},
+                status=status.HTTP_404_NOT_FOUND)
         if cat.owner != request.user:
-            return Response({"response":"Access forbidden. Only cat's owner can manage huntings."}, status=status.HTTP_403_FORBIDDEN)
+            return Response({"response":"Access forbidden. Only cat's "
+                +"owner can manage huntings."}, status=status.HTTP_403_FORBIDDEN)
         serializer = CatSerializer(cat)
         return Response(serializer.data)
 
@@ -47,17 +50,22 @@ class HuntingAPIView(APIView):
         try:
             cat = Cat.objects.get(id=idcat)
         except Cat.DoesNotExist:
-            return Response({"response": "Cat not found."}, status=status.HTTP_404_NOT_FOUND)
+            return Response({"response": "Cat not found."},
+                status=status.HTTP_404_NOT_FOUND)
         if cat.owner != request.user:
-            return Response({"response":"Access forbidden. Only cat's owner can manage huntings."}, status=status.HTTP_403_FORBIDDEN)
+            return Response({"response":"Access forbidden. Only cat's owner"
+                +" can manage huntings."}, status=status.HTTP_403_FORBIDDEN)
         serializer = HuntingSerializer(data=request.data)
         if serializer.is_valid():
             if idcat != request.data['hunter']:
-                return Response({"response" : "Cat id and hunter id don't match. Check request." }, status=status.HTTP_400_BAD_REQUEST)
+                return Response({"response" : "Cat id and hunter id don't match."
+                    +" Check request." }, status=status.HTTP_400_BAD_REQUEST)
             if serializer.validated_data['dateStart'] >= serializer.validated_data['dateEnd']:
-                return Response({"response" : "End date must be after start date." }, status=status.HTTP_400_BAD_REQUEST)
+                return Response({"response" : "End date must be after start date." },
+                    status=status.HTTP_400_BAD_REQUEST)
             if not validate_loots(request.data['loots']):
-                return Response({"response" : "Invalid loot type passed. Check the list of available types." }, status=status.HTTP_400_BAD_REQUEST)
+                return Response({"response" : "Invalid loot type passed. Check "
+                +"the list of available types." }, status=status.HTTP_400_BAD_REQUEST)
             serializer.save()
             return Response(request.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -66,13 +74,15 @@ class HuntingAPIView(APIView):
 class WelcomeAPIView(APIView):
 
     def get(self, request):
-        return Response({'response': 'Welcome. Try ./login to get login token, later ./users/id or ./hunting/catid'}, status=status.HTTP_200_OK)
+        return Response({'response': 'Welcome. Try ./login to get login token, later'
+            +' ./users/id or ./hunting/catid'}, status=status.HTTP_200_OK)
 
 
 class CustomAuthToken(ObtainAuthToken):
 
     def get(self, request, *args, **kwargs):
-        return Response({'response':'Post username and password to get your access token'}, status=status.HTTP_200_OK)
+        return Response({'response':'Post username and password to get your'
+            +' access token'}, status=status.HTTP_200_OK)
 
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data,

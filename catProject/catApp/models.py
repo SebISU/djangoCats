@@ -8,8 +8,10 @@ from django.core.exceptions import ValidationError
 from datetime import datetime
 
 
-lootTypes = ['rat', 'mouse', 'bird', 'fish', 'catnip', 'meat', 'bone', 'leftovers', 'other']
-bodyColors = ['white', 'black', 'brown', 'grey', 'ginger', 'cream', 'fawn', 'mulit-color', 'other']
+lootTypes = ['rat', 'mouse', 'bird', 'fish', 'catnip',
+            'meat', 'bone', 'leftovers', 'other']
+bodyColors = ['white', 'black', 'brown', 'grey', 'ginger',
+            'cream', 'fawn', 'mulit-color', 'other']
 
 def validate_owner(owner):
     cats = Cat.objects.filter(owner=owner)
@@ -31,7 +33,8 @@ class Cat(models.Model):
     name = models.CharField(max_length=40)
     bodyColor = models.CharField(max_length=12, choices=COLOR_CHOICES)
     gender = models.BooleanField(default=True)
-    owner = models.ForeignKey(User, related_name='cats', on_delete=models.CASCADE, validators=[validate_owner])
+    owner = models.ForeignKey(User, related_name='cats',
+            on_delete=models.CASCADE, validators=[validate_owner])
 
     def __str__(self):
         return self.name
@@ -46,11 +49,12 @@ class Hunting(models.Model):
             raise ValidationError("End date must be after start date.")
 
     def __str__(self):
-        return self.dateStart.strftime("%d-%m-%YT%H:%M:%S") + " - " + self.dateEnd.strftime("%d-%m-%YT%H:%M:%S") + " " + str(self.hunter)
+        return self.dateStart.strftime("%d-%m-%YT%H:%M:%S") + " - "
+            + self.dateEnd.strftime("%d-%m-%YT%H:%M:%S") + " " + str(self.hunter)
 
 class Loot(models.Model):
     lootType = models.CharField(max_length=10)
-    hunting = models.ForeignKey(Hunting, related_name='loots', on_delete=models.CASCADE) # change loots to hunt_loots
+    hunting = models.ForeignKey(Hunting, related_name='loots', on_delete=models.CASCADE)
     cat = models.ForeignKey(Cat, related_name='cat_loots', on_delete=models.CASCADE)
 
     def clean(self):

@@ -1,13 +1,14 @@
 import csv
 import os
 from datetime import datetime
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from django.db.models import Count
 from catApp.models import Loot, Cat, Hunting
 
 
 class Command(BaseCommand):
-    help = 'Generates a csv file containing a list of cats names with a number of loots for each.'
+    help = 'Generates a csv file containing a list of cats names'
+            +' with a number of loots for each.'
 
     def handle(self, *args, **options):
         try:
