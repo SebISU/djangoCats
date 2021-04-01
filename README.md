@@ -57,3 +57,4 @@ POST - przekazanie informacji o polowaniu. Daty, lista zdobyczy ...
     "dateEnd" : "2021-03-22",
     "hunter" : 1
 }
+
