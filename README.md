@@ -1,5 +1,3 @@
-# Api w DRF
-
 
 ## Logowanie
 path /login/
@@ -59,18 +57,3 @@ POST - przekazanie informacji o polowaniu. Daty, lista zdobyczy ...
     "dateEnd" : "2021-03-22",
     "hunter" : 1
 }
-
-# Zadania DevOps
-
-Postawiem na serwerze Linode, poniewaz mam kod rabatowy.
-
-Zapraszam pod adres IP: 139.162.156.157
-
-Username:admin
-password:admin
-
-Api sprawdzalem postmanem, moge podeslac ss-y
-
-# React
-
-Nie uczylem sie
