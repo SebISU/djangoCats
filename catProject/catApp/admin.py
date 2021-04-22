@@ -9,7 +9,7 @@ class CatAdmin(admin.ModelAdmin):
     
     def gender(self, obj):
         from django.utils.html import format_html
-        if obj.genter is True:
+        if obj.gender:
             return format_html("✅")
         return format_html("❌")
 
