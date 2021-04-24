@@ -1,5 +1,13 @@
+# Django Cats
 
-## Logowanie
+1. `docker-compose build`
+2. `docker-compose run web make migration`
+3. `docker-compose run web make migrate`
+4. `docker-compose run web make superuser`
+5. `docker-compose up`
+----
+# Endpoints
+## Login 
 path /login/
 
 GET - informacja

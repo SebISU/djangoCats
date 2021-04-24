@@ -19,7 +19,7 @@ superuser:
 	python manage.py createadmin
 
 run:
-	python manage.py runserver 0.0.0.0:80
+	python manage.py runserver 0.0.0.0:8000
 
 
 .PHONY: requirements clean-pyc migration migrate superuser run
