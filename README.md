@@ -5,6 +5,12 @@
 3. `docker-compose run web make migrate`
 4. `docker-compose run web make superuser`
 5. `docker-compose up`
+
+Server runs on `http://127.0.0.1:8000/`
+Go to `http://127.0.0.1:8000/admin/`
+You can login with credentials:
+*username: admin
+*password: admin
 ----
 # Endpoints
 ## Login 
